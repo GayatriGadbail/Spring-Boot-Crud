@@ -1,35 +1,38 @@
 package com.cjc.main.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.cjc.main.Service.HomeService;
 import com.cjc.main.model.Student;
 
-@Controller
+@RestController
 public class HomeController {
 	@Autowired
 	HomeService hs;
 	
-	@GetMapping("/")
+	@PostMapping("/")
 	public String prelogin()
 	{
 		return "login";
 		
 	}
 	
-	@GetMapping("/reg")
+	@PostMapping("/reg")
 	public String preReg()
 	{
 		return "register";
 		
 	}
-	@GetMapping("/register")
-	public String regData(@ModelAttribute Student s)
+	@PostMapping("/register")
+	public String regData(@RequestBody Student s)
 	{
 		hs.SaveData(s);
 		return "login";
